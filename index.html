@@ -70,7 +70,6 @@
 
   <div class="totals">
     <div><span>Today</span><strong id="today">–</strong></div>
-    <div><span>This week (Mon–Sun)</span><strong id="week">–</strong></div>
   </div>
   <div class="msg" id="msg"></div>
   </div>
@@ -104,7 +103,6 @@ function show(status) {
   b.className = 'main ' + (clockedIn ? 'out' : 'in');
   b.disabled = false;
   $('today').textContent = hm(status.todayHours);
-  $('week').textContent = hm(status.weekHours);
   $('pin').style.display = status.pinRequired ? 'block' : 'none';
 }
 
@@ -155,8 +153,7 @@ $('btn').addEventListener('click', async () => {
       if (r.status) show(r.status); else loadStatus();
     } else {
       show(r.status);
-      if (r.flagged) message(r.action + ' recorded at ' + r.time + ' – ⚠ ' + r.location + '. This has been flagged.', 'warn');
-      else message('✔ ' + r.action + ' recorded at ' + r.time, 'ok');
+      message('✔ ' + r.action + ' recorded at ' + r.time, 'ok');
     }
   } catch (e) {
     message('Could not save. Check your connection and try again.', 'err');
